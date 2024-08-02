@@ -1,0 +1,32 @@
+name: Publish to PyPI
+
+on:
+  push:
+    branches:
+      - main  # 배포하고 싶은 브랜치를 설정하세요
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # 원하는 Python 버전으로 변경 가능
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Publish package
+        env:
+          POETRY_PYPI_TOKEN: ${{ secrets.POETRY_PYPI_TOKEN }}  # GitHub Secrets에 저장한 토큰 사용
+        run: poetry publish --username __token__ --password $POETRY_PYPI_TOKEN

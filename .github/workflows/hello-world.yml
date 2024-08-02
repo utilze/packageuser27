@@ -1,0 +1,16 @@
+name: Hello World Workflow  # 워크플로우의 이름
+
+on: 
+  push:  # 워크플로우를 트리거하는 이벤트
+
+jobs:  # 모든 job을 그룹화
+  hello_world_job:  # job의 이름
+    runs-on: ubuntu-latest  # job을 실행할 runner
+
+    steps:  # 각 job의 단계
+      - name: Checkout repository content  # step의 이름
+        uses: actions/checkout@v4  # action 이름
+
+      - name: Run a one-line script  # step의 이름
+        run: echo "Hello, World!"  # runner 안에서 실행할 명령어
+
