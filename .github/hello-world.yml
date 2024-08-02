@@ -1,0 +1,22 @@
+name: Hello World Workflow
+on: [push]
+jobs:
+ hello_world_job:
+ runs-on: ubuntu-latest
+ steps:
+ - name: Checkout repository content
+ uses: actions/checkout@v4
+ 
+ - name: Run a one-line script
+ run: echo "Hello, World!"
+
+name: {workflow의 이름}
+on: {workflow를 trigger하는 이벤트}
+jobs: {모든 job을 그룹화}
+ {job의 이름}:
+ runs-on: {job을 실행할 runner}
+ steps:
+ - name: {step의 이름}
+ uses: {action 이름}
+ - name: {step의 이름}
+ run: {runner안에서 실행할 명령어}
